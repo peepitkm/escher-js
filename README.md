@@ -34,20 +34,24 @@ var config = {
 var host = 'example.com';
 var url = '/path';
 var method = 'GET';
+
 var body = '';
+
 var headersToSign = ['Authorization','X-Amz-Date'];
+
 var requestOptions = {
-    host: host,
-    method: method,
-    url: url,
-    headers: [['host', host]]
+	host: host,
+	method: method,
+	url: url,
+	headers: [['host', host]]
 };
 
 var signRequest = Escher.create(config).signRequest(requestOptions, body, headersToSign);
+
 var headers = {};
 signRequest.headers.forEach(function(header){
-    let key = header[0];
-    headers[key] = header[1];
+	let key = header[0];
+	headers[key] = header[1];
 });
 
 $.ajax({
@@ -56,7 +60,7 @@ $.ajax({
 	headers: headers,
 	dataType: 'json',
 	success: function (data) {
-	    console.info(data);
+		console.info(data);
 	}
 });
 
@@ -68,22 +72,25 @@ $.ajax({
 var host = 'example.com';
 var url = '/path';
 var method = 'POST';
+
 var body = JSON.stringify({
-    'this_is': 'a_request_body'
+	'this_is': 'a_request_body'
 });
 var headersToSign = ['Authorization','X-Amz-Date'];
+
 var requestOptions = {
-    host: host,
-    method: method,
-    url: url,
-    headers: [['host', host]]
+	host: host,
+	method: method,
+	url: url,
+	headers: [['host', host]]
 };
 
 var signRequest = Escher.create(config).signRequest(requestOptions, body, headersToSign);
+
 var headers = {};
 signRequest.headers.forEach(function(header){
-    let key = header[0];
-    headers[key] = header[1];
+	let key = header[0];
+	headers[key] = header[1];
 });
 
 $.ajax({
@@ -104,7 +111,6 @@ In some cases you may want to send authenticated requests from a context where y
 You can however generate a presigned URL, where the authentication information is added to the query string.
 
 ```js
-<?php
 var url = 'https://example.com/path';
 var expires = 300;
 
@@ -124,11 +130,14 @@ var requestObject = {
 	body: body
 	...
 };
+
 var keys = {
 	'ACCESS_KEY_OF_CLIENT_1'  => 'SECRET OF CLIENT 1',
 	'ACCESS_KEY_OF_CLIENT_2' => 'SECRET OF CLIENT 2',
 };
+
 var mandatorySignedHeaders = ['Authorization','X-Amz-Date'];
+
 try {
 	var authenticate = Escher.create(config).authenticate(requestObject, keys, mandatorySignedHeaders);
 } catch(err) {
