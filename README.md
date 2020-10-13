@@ -13,7 +13,11 @@ Escher works by calculating a cryptographic signature of your request, and addin
 Usually you will want to add the authentication information to the request by appending extra headers to it.
 Let's say you want to send a signed GET/POST request to http://example.com/ using the jQuery.ajax() library:
 
-### Pre-config
+### Dependencies
+- jQuery Library as `<script src="jquery.min.js"></script>`
+- Escher Library in `dist` folder as `<script src="dist/escher.min.js"></script>`
+
+### Pre-Config
 
 ```js
 var config = {
@@ -28,7 +32,7 @@ var config = {
 };
 ```
 
-### GET request
+### GET Request
 
 ```js
 var host = 'example.com';
@@ -66,7 +70,7 @@ $.ajax({
 
 ```
 
-### POST request
+### POST Request
 
 ```js
 var host = 'example.com';
