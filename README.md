@@ -17,14 +17,14 @@ Let's say you want to send a signed GET/POST request to http://example.com/ usin
 
 ```js
 var config = {
-	algoPrefix: 'AWS4', // or `YOU4`
-	vendorKey: 'AWS', // or `YOU`
-	hashAlgo: 'SHA256',
-	credentialScope: 'aws_request', // or `your_request`
-	authHeaderName: 'Authorization', // or `X-YOUR-Auth`
-	dateHeaderName: 'X-Amz-Date', // or `X-YOUR-Date`
-	accessKeyId: 'YOUR_ACCESS_KEY_ID',
-	apiSecret: 'YOUR_SECRET'
+    algoPrefix: 'AWS4', // or `YOU4`
+    vendorKey: 'AWS', // or `YOU`
+    hashAlgo: 'SHA256',
+    credentialScope: 'aws_request', // or `your_request`
+    authHeaderName: 'Authorization', // or `X-YOUR-Auth`
+    dateHeaderName: 'X-Amz-Date', // or `X-YOUR-Date`
+    accessKeyId: 'YOUR_ACCESS_KEY_ID',
+    apiSecret: 'YOUR_SECRET'
 };
 ```
 
@@ -40,28 +40,28 @@ var body = '';
 var headersToSign = ['Authorization','X-Amz-Date'];
 
 var requestOptions = {
-	host: host,
-	method: method,
-	url: url,
-	headers: [['host', host]]
+    host: host,
+    method: method,
+    url: url,
+    headers: [['host', host]]
 };
 
 var signRequest = Escher.create(config).signRequest(requestOptions, body, headersToSign);
 
 var headers = {};
 signRequest.headers.forEach(function(header){
-	let key = header[0];
-	headers[key] = header[1];
+    let key = header[0];
+    headers[key] = header[1];
 });
 
 $.ajax({
-	url: 'https://' + host + url,
-	type: method,
-	headers: headers,
-	dataType: 'json',
-	success: function (data) {
-		console.info(data);
-	}
+    url: 'https://' + host + url,
+    type: method,
+    headers: headers,
+    dataType: 'json',
+    success: function (data) {
+        console.info(data);
+    }
 });
 
 ```
@@ -74,34 +74,34 @@ var url = '/path';
 var method = 'POST';
 
 var body = JSON.stringify({
-	'this_is': 'a_request_body'
+    'this_is': 'a_request_body'
 });
 var headersToSign = ['Authorization','X-Amz-Date'];
 
 var requestOptions = {
-	host: host,
-	method: method,
-	url: url,
-	headers: [['host', host]]
+    host: host,
+    method: method,
+    url: url,
+    headers: [['host', host]]
 };
 
 var signRequest = Escher.create(config).signRequest(requestOptions, body, headersToSign);
 
 var headers = {};
 signRequest.headers.forEach(function(header){
-	let key = header[0];
-	headers[key] = header[1];
+    let key = header[0];
+    headers[key] = header[1];
 });
 
 $.ajax({
-	url: 'https://' + host + url,
-	type: method,
-	headers: headers,
-	data: body,
-	dataType: 'json',
-	success: function (data) {
-	    console.info(data);
-	}
+    url: 'https://' + host + url,
+    type: method,
+    headers: headers,
+    data: body,
+    dataType: 'json',
+    success: function (data) {
+        console.info(data);
+    }
 });
 ```
 
@@ -124,24 +124,24 @@ Escher accepts any kind of object as a key database that implements the ArrayAcc
 
 ```js
 var requestObject = {
-	host: host,
-	method: method,
-	url: url,
-	body: body
-	...
+    host: host,
+    method: method,
+    url: url,
+    body: body
+    ...
 };
 
 var keys = {
-	'ACCESS_KEY_OF_CLIENT_1'  => 'SECRET OF CLIENT 1',
-	'ACCESS_KEY_OF_CLIENT_2' => 'SECRET OF CLIENT 2',
+    'ACCESS_KEY_OF_CLIENT_1'  => 'SECRET OF CLIENT 1',
+    'ACCESS_KEY_OF_CLIENT_2' => 'SECRET OF CLIENT 2',
 };
 
 var mandatorySignedHeaders = ['Authorization','X-Amz-Date'];
 
 try {
-	var authenticate = Escher.create(config).authenticate(requestObject, keys, mandatorySignedHeaders);
+    var authenticate = Escher.create(config).authenticate(requestObject, keys, mandatorySignedHeaders);
 } catch(err) {
-	console.err(err.message);
+    console.err(err.message);
 }
 ```
 
